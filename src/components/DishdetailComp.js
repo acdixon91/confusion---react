@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
-function renderComments(dish) {
+function Hook(dish) {
+  const dishName = dish.name;
+  useEffect(() => {
+    console.log("DishDetail useEffect() is invoked");
+
+    if (dish != null) {
+      document.title = "Dish: " + dishName;
+    }
+  });
+}
+
+function RenderComments(dish) {
   const comment = dish.comments.map((item) => {
     return (
       <li key={item.id} className="media mt-2 mb-2">
@@ -24,7 +35,7 @@ function renderComments(dish) {
   return comment;
 }
 
-function renderCard(dish) {
+function RenderDish(dish) {
   return (
     <Card>
       <CardImg top width="100%" src={dish.image} alt={dish.name} />
@@ -37,14 +48,21 @@ function renderCard(dish) {
 }
 
 function Dishdetail(props) {
+  Hook(props.dish);
+
   if (props.dish == null) {
     return <div></div>;
   }
-  console.log("Dishdetail is " + props.dish.name);
+
   return (
-    <div className="row">
-      <div className="col-12 col-md-5 mt-3 m-1">{renderCard(props.dish)}</div>
-      <div className="col-12 col-md-5 m-1">{renderComments(props.dish)}</div>
+    <div className="container">
+      <div className="row">
+        <div className="col-12 col-md-5 mt-3">{RenderDish(props.dish)}</div>
+        <div className="col-12 col-md-5">
+          <h3 className="mt-2 mb-4">Comments</h3>
+          {RenderComments(props.dish)}
+        </div>
+      </div>
     </div>
   );
 }
