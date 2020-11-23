@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
-function Hook(dish) {
-  const dishName = dish.name;
+function DisplayWindow(dish) {
   useEffect(() => {
     console.log("DishDetail useEffect() is invoked");
 
     if (dish != null) {
-      document.title = "Dish: " + dishName;
+      document.title = "Dish: " + dish.name;
     }
   });
 }
@@ -48,7 +47,7 @@ function RenderDish(dish) {
 }
 
 function Dishdetail(props) {
-  Hook(props.dish);
+  DisplayWindow(props.dish);
 
   if (props.dish == null) {
     return <div></div>;
@@ -56,8 +55,8 @@ function Dishdetail(props) {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-12 col-md-5 mt-3">{RenderDish(props.dish)}</div>
+      <div className="row mb-3 mt-3">
+        <div className="col-12 col-md-5">{RenderDish(props.dish)}</div>
         <div className="col-12 col-md-5">
           <h3 className="mt-2 mb-4">Comments</h3>
           {RenderComments(props.dish)}
