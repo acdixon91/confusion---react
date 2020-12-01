@@ -28,40 +28,38 @@ class Header extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar dark expand="md">
+        <Navbar dark expand="md" fixed="top">
           <div className="container">
             <NavbarToggler onClick={this.toggleNav} />
             <NavbarBrand className="mr-auto" href="/">
               <img
                 src="assets/images/logo.png"
-                height="30"
-                width="41"
+                height="35"
+                width="46"
                 alt="Ristorane Con Fusion"
+                className="mr-3"
               ></img>
             </NavbarBrand>
             <Collapse isOpen={this.state.isNavOpen} navbar>
               <Nav navbar>
                 <NavItem>
                   <NavLink className="nav-link" to="/home">
-                    <span className="fa fa-home fa-lg"> Home</span>
+                    <i className="fa fa-home fa-lg"></i> Home
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/aboutus">
-                    <span className="fa fa-info fa-lg"> About Us</span>
+                    <i className="fa fa-info fa-lg"></i> About Us
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/menu">
-                    <span className="fa fa-list fa-lg"> Menu</span>
+                    <i className="fa fa-list fa-lg"></i> Menu
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/contactus">
-                    <span className="fa fa-address-card fa-lg">
-                      {" "}
-                      Contact Us
-                    </span>
+                    <i className="fa fa-address-card fa-lg"></i> Contact Us
                   </NavLink>
                 </NavItem>
               </Nav>
