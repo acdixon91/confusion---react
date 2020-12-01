@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  Breadcrumb,
+  BreadcrumbItem,
+} from "reactstrap";
+import { Link } from "react-router-dom";
 
 function DisplayWindow(dish) {
   useEffect(() => {
@@ -11,8 +20,8 @@ function DisplayWindow(dish) {
   });
 }
 
-function RenderComments(dish) {
-  const comment = dish.comments.map((item) => {
+function RenderComments(comments) {
+  const comment = comments.map((item) => {
     return (
       <li key={item.id} className="media mt-2 mb-2">
         <div className="media-body">
@@ -55,11 +64,23 @@ function Dishdetail(props) {
 
   return (
     <div className="container">
+      <div className="row">
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <Link to="/menu">Menu</Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+        </Breadcrumb>
+        <div className="col-12">
+          <h3>{props.dish.name}</h3>
+          <hr />
+        </div>
+      </div>
       <div className="row mb-3 mt-3">
         <div className="col-12 col-md-5">{RenderDish(props.dish)}</div>
         <div className="col-12 col-md-5">
           <h3 className="mt-2 mb-4">Comments</h3>
-          {RenderComments(props.dish)}
+          {RenderComments(props.comments)}
         </div>
       </div>
     </div>
