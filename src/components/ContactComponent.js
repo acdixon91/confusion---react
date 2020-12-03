@@ -69,23 +69,33 @@ class Contact extends Component {
       errors.firstname = "First name should be greater than 3 charecters";
     } else if (this.state.touched.firstname && firstname.length > 10) {
       errors.firstname = "First name should be less than 10 charecters";
+    } else if (this.state.touched.firstname && errors.firstname === "") {
+      errors.firstname = "valid";
     }
 
     if (this.state.touched.lastname && lastname.length < 3) {
       errors.lastname = "Last name should be greater than 3 charecters";
     } else if (this.state.touched.lastname && lastname.length > 10) {
       errors.lastname = "Last name should be less than 10 charecters";
+    } else if (this.state.touched.lastname && errors.lastname === "") {
+      errors.lastname = "valid";
     }
 
     const reg = /^\d+$/;
     if (this.state.touched.telnum && !reg.test(telnum))
       errors.telnum = "Tel. Number should contain only numbers";
+    else if (this.state.touched.telnum && errors.telnum === "") {
+      errors.telnum = "valid";
+    }
 
     if (
       this.state.touched.email &&
       email.split("").filter((x) => x === "@").length !== 1
-    )
+    ) {
       errors.email = "Email should contain a @";
+    } else if (this.state.touched.email && errors.email === "") {
+      errors.email = "valid";
+    }
 
     return errors;
   }
@@ -178,8 +188,10 @@ class Contact extends Component {
                     name="firstname"
                     placeholder="First Name"
                     value={this.state.firstname}
-                    valid={errors.firstname === ""}
-                    invalid={errors.firstname !== ""}
+                    valid={errors.firstname === "valid"}
+                    invalid={
+                      errors.firstname !== "valid" && errors.firstname !== ""
+                    }
                     onBlur={this.handleBlur("firstname")}
                     onChange={this.handleInputChange}
                   ></Input>
@@ -197,8 +209,10 @@ class Contact extends Component {
                     name="lastname"
                     placeholder="Last Name"
                     value={this.state.lastname}
-                    valid={errors.lastname === ""}
-                    invalid={errors.lastname !== ""}
+                    valid={errors.lastname === "valid"}
+                    invalid={
+                      errors.lastname !== "valid" && errors.lastname !== ""
+                    }
                     onBlur={this.handleBlur("lastname")}
                     onChange={this.handleInputChange}
                   ></Input>
@@ -216,8 +230,8 @@ class Contact extends Component {
                     name="telnum"
                     placeholder="Tel. number"
                     value={this.state.telnum}
-                    valid={errors.telnum === ""}
-                    invalid={errors.telnum !== ""}
+                    valid={errors.telnum === "valid"}
+                    invalid={errors.telnum !== "valid" && errors.telnum !== ""}
                     onBlur={this.handleBlur("telnum")}
                     onChange={this.handleInputChange}
                   />
@@ -235,8 +249,8 @@ class Contact extends Component {
                     name="email"
                     placeholder="Email"
                     value={this.state.email}
-                    valid={errors.email === ""}
-                    invalid={errors.email !== ""}
+                    valid={errors.email === "valid"}
+                    invalid={errors.email !== "valid" && errors.email !== ""}
                     onBlur={this.handleBlur("email")}
                     onChange={this.handleInputChange}
                   />
