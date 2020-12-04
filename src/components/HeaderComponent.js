@@ -64,8 +64,8 @@ class Header extends Component {
             <NavbarBrand className="mr-auto" href="/">
               <img
                 src="assets/images/logo.png"
-                height="35"
-                width="46"
+                height="45"
+                width="59"
                 alt="Ristorane Con Fusion"
                 className="mr-3"
               ></img>

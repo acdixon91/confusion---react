@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardImg,
@@ -7,8 +7,20 @@ import {
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Button,
+  Row,
+  Label,
+  Col,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Control, LocalForm, Errors } from "react-redux-form";
+
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !val || val.length <= len;
+const minLength = (len) => (val) => val && val.length >= len;
 
 function DisplayWindow(dish) {
   useEffect(() => {
@@ -18,6 +30,11 @@ function DisplayWindow(dish) {
       document.title = "Dish: " + dish.name;
     }
   });
+}
+
+function handleSubmit(values) {
+  console.log("Current state is: " + JSON.stringify(values));
+  alert("Current state is: " + JSON.stringify(values));
 }
 
 function RenderComments(comments) {
@@ -58,35 +75,126 @@ function RenderDish(dish) {
 function Dishdetail(props) {
   DisplayWindow(props.dish);
 
+  const [modal, setModal] = useState(false);
+
   if (props.dish == null) {
     return <div></div>;
   }
 
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
   return (
-    <div className="container">
-      <div className="row">
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Link to="/Home">Home</Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <Link to="/menu">Menu</Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-        </Breadcrumb>
-        <div className="col-12">
-          <h3>{props.dish.name}</h3>
-          <hr />
+    <React.Fragment>
+      <div className="container">
+        <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/Home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Link to="/menu">Menu</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+          </Breadcrumb>
+          <div className="col-12">
+            <h3>{props.dish.name}</h3>
+            <hr />
+          </div>
+        </div>
+        <div className="row mb-3 mt-3">
+          <div className="col-12 col-md-5">{RenderDish(props.dish)}</div>
+          <div className="col-12 col-md-5">
+            <h3 className="mt-2 mb-4">Comments</h3>
+            {RenderComments(props.comments)}
+            <Button
+              type="button"
+              className="bg-primary mt-2"
+              onClick={toggleModal}
+            >
+              <i className="fa fa-pencil fa-lg"></i> Submit Comment
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="row mb-3 mt-3">
-        <div className="col-12 col-md-5">{RenderDish(props.dish)}</div>
-        <div className="col-12 col-md-5">
-          <h3 className="mt-2 mb-4">Comments</h3>
-          {RenderComments(props.comments)}
-        </div>
-      </div>
-    </div>
+      <Modal isOpen={modal} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Submit Review</ModalHeader>
+        <ModalBody>
+          <LocalForm onSubmit={(values) => handleSubmit(values)}>
+            <Row className="form-group">
+              <Label htmlFor="rating" md={3}>
+                Rating
+              </Label>
+              <Col md={12}>
+                <Control.select
+                  model=".rating"
+                  name="rating"
+                  className="form-control"
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Control.select>
+              </Col>
+            </Row>
+            <Row className="form-group">
+              <Label htmlFor="name" md={3}>
+                Your Name
+              </Label>
+              <Col md={12}>
+                <Control.text
+                  model=".name"
+                  id="name"
+                  name="name"
+                  placeholder=""
+                  className="form-control"
+                  validators={{
+                    required,
+                    minLength: minLength(4),
+                    maxLength: maxLength(20),
+                  }}
+                />
+                <Errors
+                  className="text-danger"
+                  model=".name"
+                  show="touched"
+                  messages={{
+                    required: "Required... ",
+                    minLength: "Must be greater than 4 numbers",
+                    maxLength: "Must be 20 numbers or less",
+                  }}
+                />
+              </Col>
+            </Row>
+            <Row className="form-group">
+              <Label htmlFor="comment" md={3}>
+                Comments
+              </Label>
+              <Col md={12}>
+                <Control.textarea
+                  model=".comment"
+                  id="comment"
+                  name="comment"
+                  placeholder=""
+                  className="form-control"
+                  rows="10"
+                />
+              </Col>
+            </Row>
+            <Row className="form-group">
+              <Col md={{ size: 10 }}>
+                <Button type="submit" color="primary" onClick={toggleModal}>
+                  Submit Review
+                </Button>
+              </Col>
+            </Row>
+          </LocalForm>
+        </ModalBody>
+      </Modal>
+    </React.Fragment>
   );
 }
 
