@@ -22,19 +22,18 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
 
-function DisplayWindow(dish) {
+function DisplayWindow(dish, comments) {
   useEffect(() => {
-    console.log("DishDetail useEffect() is invoked");
-
     if (dish != null) {
       document.title = "Dish: " + dish.name;
     }
   });
 }
 
-function handleSubmit(values) {
+function handleSubmit(values, props) {
+  console.log("Dish ID is: " + props.dish.id);
+  props.addComment(props.dish.id, values.rating, values.author, values.comment);
   console.log("Current state is: " + JSON.stringify(values));
-  alert("Current state is: " + JSON.stringify(values));
 }
 
 function RenderComments(comments) {
@@ -46,7 +45,7 @@ function RenderComments(comments) {
             <em>{item.comment}</em>
           </p>
           <p className="text-muted">
-            -- {item.author},{" "}
+            - {item.author},{" "}
             {new Intl.DateTimeFormat("en-US", {
               year: "numeric",
               month: "short",
@@ -73,9 +72,11 @@ function RenderDish(dish) {
 }
 
 function Dishdetail(props) {
-  DisplayWindow(props.dish);
+  DisplayWindow(props.dish, props.comments);
 
   const [modal, setModal] = useState(false);
+
+  console.log("Dishdetail triggered");
 
   if (props.dish == null) {
     return <div></div>;
@@ -121,7 +122,7 @@ function Dishdetail(props) {
       <Modal isOpen={modal} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Submit Review</ModalHeader>
         <ModalBody>
-          <LocalForm onSubmit={(values) => handleSubmit(values)}>
+          <LocalForm onSubmit={(values) => handleSubmit(values, props)}>
             <Row className="form-group">
               <Label htmlFor="rating" md={3}>
                 Rating
@@ -132,23 +133,23 @@ function Dishdetail(props) {
                   name="rating"
                   className="form-control"
                 >
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
                   <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                  <option>1</option>
                 </Control.select>
               </Col>
             </Row>
             <Row className="form-group">
-              <Label htmlFor="name" md={3}>
+              <Label htmlFor="author" md={3}>
                 Your Name
               </Label>
               <Col md={12}>
                 <Control.text
-                  model=".name"
-                  id="name"
-                  name="name"
+                  model=".author"
+                  id="author"
+                  name="author"
                   placeholder=""
                   className="form-control"
                   validators={{
@@ -159,7 +160,7 @@ function Dishdetail(props) {
                 />
                 <Errors
                   className="text-danger"
-                  model=".name"
+                  model=".author"
                   show="touched"
                   messages={{
                     required: "Required... ",
