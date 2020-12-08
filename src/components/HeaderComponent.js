@@ -59,13 +59,13 @@ class Header extends Component {
     return (
       <React.Fragment>
         <Navbar dark expand="md" fixed="top">
-          <div className="container">
+          <div className="container-fluid">
             <NavbarToggler onClick={this.toggleNav} />
-            <NavbarBrand className="mr-auto" href="/">
+            <NavbarBrand className="mr-md-5 ml-md-3" href="/">
               <img
                 src="assets/images/logo.png"
-                height="45"
-                width="59"
+                height="55"
+                width="70"
                 alt="Ristorane Con Fusion"
                 className="mr-3"
               ></img>
@@ -95,7 +95,7 @@ class Header extends Component {
               </Nav>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <Button outline onClick={this.toggleModal}>
+                  <Button outline className="mr-5" onClick={this.toggleModal}>
                     <i className="fa fa-sign-in fa-lg"></i> Login
                   </Button>
                 </NavItem>
@@ -149,7 +149,11 @@ class Header extends Component {
                   Remember Me
                 </Label>
               </FormGroup>
-              <Button type="submit" value="submit" className="bg-primary mt-3">
+              <Button
+                type="submit"
+                value="submit"
+                className="bg-primary mt-3 mr-md-3"
+              >
                 Login
               </Button>
             </Form>

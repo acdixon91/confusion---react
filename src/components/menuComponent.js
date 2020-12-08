@@ -66,7 +66,7 @@ function Menu(props) {
             <hr />
           </div>
         </div>
-        <div className="row">{menu}</div>
+        <div className="row mb-5">{menu}</div>
       </div>
     );
 }
