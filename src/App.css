@@ -40,3 +40,14 @@ address {
 .modal-header {
   background-color: #9575cd;
 }
+
+.strokeme {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.image_sizer {
+  max-height: 480px;
+  max-width: 720px;
+}

@@ -13,12 +13,12 @@ import { Loading } from "./LoadingComponent";
 
 function RenderMenuItem({ dish }) {
   return (
-    <Card>
+    <Card className="mb-2">
       <Link to={`/menu/${dish.id}`}>
-        <CardImg width="100%" src={dish.image} alt={dish.name} />
+        <CardImg width="100%" src={dish.image} alt={dish.name} className="" />
         <CardImgOverlay>
-          <CardTitle className="font-weight-bolder">
-            <h4>{dish.name}</h4>
+          <CardTitle className="font-weight-bolder strokeme">
+            <h3>{dish.name}</h3>
           </CardTitle>
         </CardImgOverlay>
       </Link>
@@ -29,7 +29,7 @@ function RenderMenuItem({ dish }) {
 function Menu(props) {
   const menu = props.dishes.dishes.map((dish) => {
     return (
-      <div key={dish.id} className="col-12 col-md-5 mt-1 ">
+      <div key={dish.id} className="col-12 col-md-6 mt-1 ">
         <RenderMenuItem dish={dish} />
       </div>
     );
