@@ -63,9 +63,9 @@ class Header extends Component {
             <NavbarToggler onClick={this.toggleNav} />
             <NavbarBrand className="mr-md-5 ml-md-3" href="/">
               <img
-                src="assets/images/logo.png"
-                height="55"
-                width="70"
+                src="assets/images/ignis.logo.jpeg"
+                height="50"
+                width="130"
                 alt="Ristorane Con Fusion"
                 className="mr-3"
               ></img>
@@ -95,7 +95,7 @@ class Header extends Component {
               </Nav>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <Button outline className="mr-5" onClick={this.toggleModal}>
+                  <Button outline className="mr-3" onClick={this.toggleModal}>
                     <i className="fa fa-sign-in fa-lg"></i> Login
                   </Button>
                 </NavItem>
