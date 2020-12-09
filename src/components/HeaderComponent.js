@@ -67,7 +67,7 @@ class Header extends Component {
                 height="50"
                 width="130"
                 alt="Ristorane Con Fusion"
-                className="mr-3"
+                className=""
               ></img>
             </NavbarBrand>
             <Collapse isOpen={this.state.isNavOpen} navbar>

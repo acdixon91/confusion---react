@@ -34,7 +34,12 @@ function DisplayWindow(dish, comments) {
 
 function handleSubmit(values, props) {
   console.log("Dish ID is: " + props.dish.id);
-  props.addComment(props.dish.id, values.rating, values.author, values.comment);
+  props.postComment(
+    props.dish.id,
+    values.rating,
+    values.author,
+    values.comment
+  );
   console.log("Current state is: " + JSON.stringify(values));
 }
 
