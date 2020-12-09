@@ -14,9 +14,9 @@ import { FadeTransform, Fade, Stagger } from "react-animation-components";
 function RenderLeader({ leader }) {
   return (
     <Fade in>
-      <div key={leader.id} className="col-12 mt-5">
+      <div key={leader.id} className="col-12 mt-2 mt-md-5">
         <Media tag="li">
-          <Media left middle>
+          <Media left top className="col-12 col-md-7 d-none d-sm-block">
             <Media
               object
               className="img-fluid"
@@ -24,14 +24,14 @@ function RenderLeader({ leader }) {
               alt={leader.name}
             />
           </Media>
-          <Media body className="ml-md-5">
+          <Media body className="ml-md-5 col-12 col-md-5">
             <Media heading className="h3 font-weight-bold mb-1">
               {leader.name}
             </Media>
             <Media heading className="h5 font-italic text-muted mt-0">
               {leader.designation}
             </Media>
-            <p>{leader.description}</p>
+            <p className="d-none d-sm-block">{leader.description}</p>
           </Media>
         </Media>
       </div>
