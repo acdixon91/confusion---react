@@ -9,30 +9,38 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../shared/baseUrl";
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
 
 function RenderLeader({ leader }) {
   return (
-    <div key={leader.id} className="col-12 mt-5">
-      <Media tag="li">
-        <Media left middle>
-          <Media object src={baseUrl + leader.image} alt={leader.name} />
-        </Media>
-        <Media body className="ml-5">
-          <Media heading className="h3 font-weight-bold mb-1">
-            {leader.name}
+    <Fade in>
+      <div key={leader.id} className="col-12 mt-5">
+        <Media tag="li">
+          <Media left middle>
+            <Media
+              object
+              className="img-fluid"
+              src={baseUrl + leader.image}
+              alt={leader.name}
+            />
           </Media>
-          <Media heading className="h5 font-italic text-muted mt-0">
-            {leader.designation}
+          <Media body className="ml-md-5">
+            <Media heading className="h3 font-weight-bold mb-1">
+              {leader.name}
+            </Media>
+            <Media heading className="h5 font-italic text-muted mt-0">
+              {leader.designation}
+            </Media>
+            <p>{leader.description}</p>
           </Media>
-          <p>{leader.description}</p>
         </Media>
-      </Media>
-    </div>
+      </div>
+    </Fade>
   );
 }
 
 function About(props) {
-  const leaders = props.leaders.map((leader) => {
+  const leaders = props.leaders.leaders.map((leader) => {
     return (
       <div>
         <RenderLeader leader={leader} />
@@ -56,7 +64,7 @@ function About(props) {
       </div>
       <div className="row row-content">
         <div className="col-12 col-md-6">
-          <h2>Our History</h2>
+          <h2 className="font-weight-bold">Our History</h2>
           <p>
             Started in 2010, Ristorante con Fusion quickly established itself as
             a culinary icon par excellence in Hong Kong. With its unique brand
@@ -113,10 +121,12 @@ function About(props) {
       </div>
       <div className="row row-content">
         <div className="col-12">
-          <h2 className="font-weight-bolder">Corporate Leadership</h2>
+          <h2 className="font-weight-bold">Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <Media list>{leaders}</Media>
+          <Media list className="pl-0 ml-0">
+            <Stagger in>{leaders}</Stagger>
+          </Media>
         </div>
       </div>
     </div>

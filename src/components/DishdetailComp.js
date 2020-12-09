@@ -47,21 +47,23 @@ function handleSubmit(values, props) {
 function RenderComments(comments) {
   const comment = comments.map((item) => {
     return (
-      <li key={item.id} className="media mt-2 mb-2">
-        <div className="media-body">
-          <p className="h5">
-            <em>{item.comment}</em>
-          </p>
-          <p className="text-muted">
-            - {item.author},{" "}
-            {new Intl.DateTimeFormat("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "2-digit",
-            }).format(new Date(Date.parse(item.date)))}
-          </p>
-        </div>
-      </li>
+      <Fade in>
+        <li key={item.id} className="media mt-2 mb-2">
+          <div className="media-body">
+            <p className="h5">
+              <em>{item.comment}</em>
+            </p>
+            <p className="text-muted">
+              - {item.author},{" "}
+              {new Intl.DateTimeFormat("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "2-digit",
+              }).format(new Date(Date.parse(item.date)))}
+            </p>
+          </div>
+        </li>
+      </Fade>
     );
   });
   return comment;
@@ -138,7 +140,7 @@ function Dishdetail(props) {
           <div className="col-12 col-md-5">{RenderDish(props.dish)}</div>
           <div className="col-12 col-md-5">
             <h3 className="mt-2 mb-4">Comments</h3>
-            {RenderComments(props.comments)}
+            <Stagger in>{RenderComments(props.comments)}</Stagger>
             <Button
               type="button"
               className="bg-primary mt-2"

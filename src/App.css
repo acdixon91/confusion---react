@@ -47,11 +47,6 @@ address {
     1px 1px 0 #000;
 }
 
-.image_sizer {
-  max-height: 480px;
-  max-width: 720px;
-}
-
 .page-enter {
   opacity: 0.01;
   transform: translateX(-100%);

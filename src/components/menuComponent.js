@@ -10,25 +10,28 @@ import {
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
+import { FadeTransform, Stagger, Fade } from "react-animation-components";
 // import DishDetail2 from "./DishdetailComp";
 
 function RenderMenuItem({ dish }) {
   return (
-    <Card className="mb-2">
-      <Link to={`/menu/${dish.id}`}>
-        <CardImg
-          width="100%"
-          src={baseUrl + dish.image}
-          alt={dish.name}
-          className=""
-        />
-        <CardImgOverlay>
-          <CardTitle className="font-weight-bolder strokeme">
-            <h3>{dish.name}</h3>
-          </CardTitle>
-        </CardImgOverlay>
-      </Link>
-    </Card>
+    <Fade in>
+      <Card className="mb-2">
+        <Link to={`/menu/${dish.id}`}>
+          <CardImg
+            width="100%"
+            src={baseUrl + dish.image}
+            alt={dish.name}
+            className=""
+          />
+          <CardImgOverlay>
+            <CardTitle className="font-weight-bolder strokeme">
+              <h3>{dish.name}</h3>
+            </CardTitle>
+          </CardImgOverlay>
+        </Link>
+      </Card>
+    </Fade>
   );
 }
 
@@ -36,7 +39,9 @@ function Menu(props) {
   const menu = props.dishes.dishes.map((dish) => {
     return (
       <div key={dish.id} className="col-12 col-md-6 mt-1 ">
-        <RenderMenuItem dish={dish} />
+        <Stagger in>
+          <RenderMenuItem dish={dish} />
+        </Stagger>
       </div>
     );
   });
