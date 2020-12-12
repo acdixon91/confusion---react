@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
-import { baseUrl } from "../shared/baseUrl";
+// import { baseUrl } from "../shared/baseUrl";
 import { FadeTransform, Stagger, Fade } from "react-animation-components";
 // import DishDetail2 from "./DishdetailComp";
 
@@ -18,12 +18,7 @@ function RenderMenuItem({ dish }) {
     <Fade in>
       <Card className="mb-2">
         <Link to={`/menu/${dish.id}`}>
-          <CardImg
-            width="100%"
-            src={baseUrl + dish.image}
-            alt={dish.name}
-            className=""
-          />
+          <CardImg width="100%" src={dish.image} alt={dish.name} className="" />
           <CardImgOverlay>
             <CardTitle className="font-weight-bolder strokeme">
               <h3>{dish.name}</h3>
