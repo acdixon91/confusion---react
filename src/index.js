@@ -6,6 +6,11 @@ import "bootstrap-social/bootstrap-social.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import firebase from "firebase";
+import config from "./fireConfig";
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+firebase.initializeApp(config);
 
 ReactDOM.render(
   <React.StrictMode>

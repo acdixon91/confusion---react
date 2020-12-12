@@ -8,8 +8,8 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { baseUrl } from "../shared/baseUrl";
-import { FadeTransform, Fade, Stagger } from "react-animation-components";
+// import { baseUrl } from "../shared/baseUrl";
+import { Fade, Stagger } from "react-animation-components";
 
 function RenderLeader({ leader }) {
   return (
@@ -20,7 +20,7 @@ function RenderLeader({ leader }) {
             <Media
               object
               className="img-fluid"
-              src={baseUrl + leader.image}
+              src={leader.image}
               alt={leader.name}
             />
           </Media>

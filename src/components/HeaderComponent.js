@@ -28,6 +28,7 @@ class Header extends Component {
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.checkNav = this.checkNav.bind(this);
   }
 
   toggleNav() {
@@ -40,6 +41,12 @@ class Header extends Component {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
+  }
+
+  checkNav() {
+    if (this.state.isNavOpen) {
+      this.toggleNav();
+    }
   }
 
   handleLogin(event) {
@@ -73,22 +80,38 @@ class Header extends Component {
             <Collapse isOpen={this.state.isNavOpen} navbar>
               <Nav navbar>
                 <NavItem>
-                  <NavLink className="nav-link" to="/home">
+                  <NavLink
+                    className="nav-link"
+                    to="/home"
+                    onClick={this.checkNav}
+                  >
                     <i className="fa fa-home fa-lg"></i> Home
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/aboutus">
+                  <NavLink
+                    className="nav-link"
+                    to="/aboutus"
+                    onClick={this.checkNav}
+                  >
                     <i className="fa fa-info fa-lg"></i> About Us
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/menu">
+                  <NavLink
+                    className="nav-link"
+                    to="/menu"
+                    onClick={this.checkNav}
+                  >
                     <i className="fa fa-list fa-lg"></i> Menu
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/contactus">
+                  <NavLink
+                    className="nav-link"
+                    to="/contactus"
+                    onClick={this.checkNav}
+                  >
                     <i className="fa fa-address-card fa-lg"></i> Contact Us
                   </NavLink>
                 </NavItem>
